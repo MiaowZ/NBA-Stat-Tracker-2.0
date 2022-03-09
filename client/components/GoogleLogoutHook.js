@@ -22,7 +22,7 @@ function GoogleLogoutHook() {
     });
 
     return (
-        <button onClick={signOut} className="button">
+        <button onClick={signOut} className="button" id = "log-out">
             <span className="buttonText">Logout</span>
         </button>
     );
