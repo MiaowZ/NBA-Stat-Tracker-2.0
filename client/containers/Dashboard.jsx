@@ -3,11 +3,13 @@ import Team from '../components/Team';
 import Player from '../components/Player';
 
 function Dashboard({ favsPlayer, favsTeam, setFavsPlayer, setFavsTeam }) {
-  const playerComponents = favsPlayer.map((playerId) => (
+  console.log("favsPlayer", favsPlayer);
+  console.log("favsTeam", favsTeam);
+  const playerComponents = favsPlayer.map((e) => (
     <Player
       favsPlayer={favsPlayer}
       setFavsPlayer={setFavsPlayer}
-      playerId={playerId}
+      playerId={e.player_id}
     />
   ));
   const teamComponents = favsTeam.map((teamId) => (

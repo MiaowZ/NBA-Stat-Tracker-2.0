@@ -88,6 +88,8 @@ function Player({ favsPlayer, setFavsPlayer, playerId }) {
       }
     )
       .then((res) => res.json())
+      //check API data
+      .then((data) => console.log('API Data from fetch', data))
       .then((data) => populatePlayer(data));
 
     fetch(`https://api-nba-v1.p.rapidapi.com/players?id=${playerId}`, {

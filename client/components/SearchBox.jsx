@@ -96,11 +96,13 @@ function SearchBox({ setFavsPlayer, setFavsTeam }) {
   // add favorited team to database and set state
   const addFavoriteTeam = () => {
     const teamId = document.getElementById('team-names').value;
+    console.log('team id below:');
+    console.log(teamId);
     fetch('/user/addTeam/' + teamId, {
       method: 'POST',
     })
       .then((data) => data.json())
-      .then((data) => setFavsTeam(data.teams));
+      .then((data) => setFavsTeam(data));
   };
 
   // add favorited player to database and set state
@@ -111,7 +113,7 @@ function SearchBox({ setFavsPlayer, setFavsTeam }) {
       body: JSON.stringify(playerId),
     })
       .then((data) => data.json())
-      .then((data) => setFavsPlayer(data.players));
+      .then((data) => setFavsPlayer(data));
   };
 
   return (

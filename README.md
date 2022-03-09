@@ -24,7 +24,7 @@ Create Table players (
 
 Create Table favoriteTeams (
   id SERIAL,
-  user_id INT,
+  email varchar,
   team_id
 );
 

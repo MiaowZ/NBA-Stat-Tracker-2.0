@@ -11,21 +11,21 @@ function GoogleLogoutHook() {
         alert(`Peace,  ${res.profileObj.name}`);
     };
 
-    const onFailure = (res) => {
-        alert('Error: ', res);
-    };
+  const onFailure = (res) => {
+    alert('Error: ', res);
+  };
 
-    const {signOut} = useGoogleLogout({
-        clientId,
-        onLogoutSuccess,
-        onFailure,
-    });
+  const { signOut } = useGoogleLogout({
+    clientId,
+    onLogoutSuccess,
+    onFailure,
+  });
 
-    return (
-        <button onClick={signOut} className="button" id = "log-out">
-            <span className="buttonText">Logout</span>
-        </button>
-    );
+  return (
+    <button onClick={signOut} className="button" id = "log-out">
+        <span className="buttonText">Logout</span>
+     </button>
+  );
 }
 
 
