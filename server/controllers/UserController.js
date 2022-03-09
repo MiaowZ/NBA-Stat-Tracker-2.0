@@ -53,6 +53,13 @@ const UserController = {
     }
   },
 
+<<<<<<< HEAD
+  addTeam(req, res, next) {
+    const { teamId } = req.params;
+
+    const addTeamQuery = 'INSERT INTO favoriteTeams VALUES ($1, $2) ON CONFLICT DO NOTHING';
+    const values = [res.cookies.email, teamId];
+=======
   getTeams(req, res, next) {
     const getFavTeamQuery = 'SELECT team_id FROM favoriteTeams WHERE email = $1;';
     console.log('cookies', req.cookies.email);
@@ -88,6 +95,7 @@ const UserController = {
     const { teamId } = req.params;
     console.log('team id as param');
     console.log(teamId);
+>>>>>>> 17a9493689301be0a096ab3bcbbcfd789d404fd8
 
     // const addTeamQuery = 'INSERT INTO favoriteTeams (email, team_id) VALUES ($1, $2) ON CONFLICT (email, team_id) DO NOTHING;';
     const addTeamQuery = 'INSERT INTO favoriteTeams (email, team_id) VALUES ($1, $2);';
@@ -95,11 +103,15 @@ const UserController = {
 
     db.query(addTeamQuery, values)
       .then(next())
+<<<<<<< HEAD
+      .catch((err) => next(err));
+=======
       .catch((err) => next({
         log: `Error occured in addTeam Controller: ${err}`,
         status: 400,
         message: { err: 'Was not able to add team' },
       }));
+>>>>>>> 17a9493689301be0a096ab3bcbbcfd789d404fd8
 
     // query.favorited_teams = teamId;
     // User.findOneAndUpdate(
@@ -154,6 +166,16 @@ const UserController = {
   },
 
   addPlayer(req, res, next) {
+<<<<<<< HEAD
+   const { playerId } = req.params;
+
+   const addPlayerQuery = 'INSERT INTO favoritePlayers (email, player_id) VALUES ($1, $2) on DEFAULT NULL;';
+   const values = [res.cookies.email, playerId];
+
+   db.query(addPlayerQuery, values)
+   .then(next())
+   .catch((err) => next(err));
+=======
     const { playerId } = req.params;
 
     const addPlayer = 'INSERT INTO favoritePlayers (email, player_id) VALUES ($1, $2);';
@@ -166,6 +188,7 @@ const UserController = {
         status: 400,
         message: { err: 'Was not able to add player' },
       }));
+>>>>>>> 17a9493689301be0a096ab3bcbbcfd789d404fd8
   },
 
   // addPlayer(req, res, next) {
@@ -191,6 +214,44 @@ const UserController = {
   //   );
   // },
 
+<<<<<<< HEAD
+
+  removePlayer(req, res, next) {
+    const { teamId } = req.params;
+    
+    const removePlayerQuery = 'DELETE FROM favoritePlayers (email, player_id) VALUES ($1, $2) on DEFAULT NULL;';
+    const values = [res.cookies.email, playerId];
+    const getFavPlayerQuery = 'SELECT player_id FROM favoritePlayers WHERE email = $1;';
+    
+    db.query(removePlayerQuery, values)
+    .then(() =>
+     db.query(getFavPlayerQuery, [req.cookies.email])
+     .then(() => {
+       res.locals.players = favoritePlayers.player_id;
+       return next();
+      })
+      ).catch((err) => next(err));
+
+    query.favorited_players = playerId;
+    User.findOneAndUpdate(
+      { email: req.cookies.email },
+      { $pull: query },
+      { new: true },
+      (err, user) => {
+        if (err) {
+          return next({
+            log: 'Error in addPlayer middleware',
+            message: {
+              err: 'An error occurred while trying to remove a player',
+            },
+          });
+        }
+        res.locals.players = favoritePlayers.player_id;
+        return next();
+      }
+    );
+  },
+=======
   //  removePlayer(req, res, next) {
   //   const { playerId } = req.params;
   //   const query = {};
@@ -213,6 +274,31 @@ const UserController = {
   //     }
   //   );
   // },
+>>>>>>> 17a9493689301be0a096ab3bcbbcfd789d404fd8
 };
+
+// removePlayer(req, res, next) {
+//   const { playerId } = req.params;
+//   const query = {};
+//   query.favorited_players = playerId;
+//   User.findOneAndUpdate(
+//     { email: req.cookies.email },
+//     { $pull: query },
+//     { new: true },
+//     (err, user) => {
+//       if (err) {
+//         return next({
+//           log: 'Error in addPlayer middleware',
+//           message: {
+//             err: 'An error occurred while trying to remove a player',
+//           },
+//         });
+//       }
+//       res.locals.players = user.favorited_players;
+//       return next();
+//     }
+//   );
+// },
+// };
 
 module.exports = UserController;
