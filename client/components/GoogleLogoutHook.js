@@ -1,15 +1,14 @@
 import React from 'react';
-import {useGoogleLogout} from 'react-google-login';
+import { useGoogleLogout } from 'react-google-login';
 
-const {CLIENT_ID} = process.env;
+const { CLIENT_ID } = process.env;
 const clientId = CLIENT_ID;
 
 function GoogleLogoutHook() {
-    const onLogoutSuccess = (res) => {
-        console.log('Logout successful: res: ', res);
-        
-        alert(`Peace,  ${res.profileObj.name}`);
-    };
+  const onLogoutSuccess = (res) => {
+    console.log('Logout successful: res: ', res);
+    alert(`Peace,  ${res.profileObj.name}`);
+  };
 
   const onFailure = (res) => {
     alert('Error: ', res);
@@ -27,6 +26,5 @@ function GoogleLogoutHook() {
      </button>
   );
 }
-
 
 export default GoogleLogoutHook;

@@ -30,6 +30,7 @@ function SearchBox({ setFavsPlayer, setFavsTeam }) {
       .then((data) => data.json())
       .then((data) => {
         const nbaTeams = [];
+        console.log(data)
         data.response.forEach((team) => {
           if (
             team.nbaFranchise === true &&

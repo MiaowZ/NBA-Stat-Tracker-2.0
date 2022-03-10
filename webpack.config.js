@@ -38,6 +38,10 @@ module.exports = {
         test: /\.s[ac]ss$/,
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
+      {
+        test: /\.mp4$/,
+        loader: 'file-loader',
+      },
     ],
   },
   plugins: [
